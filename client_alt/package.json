@@ -1,0 +1,23 @@
+{
+  "name": "client_alt",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "core-js": "^2.6.5",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.3"
+  },
+  "devDependencies": {
+    "@aspnet/signalr": "^1.1.4",
+    "@fortawesome/fontawesome-free": "^5.8.2",
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
+    "axios": "^0.18.0",
+    "bootstrap-vue": "^2.0.0-rc.20",
+    "vue-template-compiler": "^2.5.21"
+  }
+}

@@ -7,7 +7,8 @@ namespace server.Hubs
     {
         public async Task SendMyEvent()
         {
-            await Clients.All.SendAsync("MyEvent");
+            var message = "Hello all";
+            await Clients.All.SendAsync("HelloEvent", message);
         }
     }
 }

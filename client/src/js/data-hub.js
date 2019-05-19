@@ -3,9 +3,17 @@ import {HubConnectionBuilder, LogLevel} from '@aspnet/signalr'
 export default{
     install(Vue) {
         const connection = new HubConnectionBuilder()
-            .withUrl("https://localhost:5001/data-hub")
+            .withUrl(`${Vue.prototype.$http.defaults.baseURL}/data-hub`)
             .configureLogging(LogLevel.Information)
             .build()
+
+        const dataHub = new Vue()
+
+        connection.on('HelloEvent', (message) => {
+            dataHub.$emit('data-changed', {message})
+        })
+
+        Vue.prototype.$dataHub = dataHub
 
         let startedPromise = null
         function start () {

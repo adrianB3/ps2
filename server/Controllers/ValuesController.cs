@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using server.Hubs;
 using server.Models;
 
 namespace server.Controllers
@@ -12,18 +14,18 @@ namespace server.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private static ConcurrentBag<Data> _data = new ConcurrentBag<Data>
+        private readonly IHubContext<DataHub> hubContext;
+
+        public ValuesController(IHubContext<DataHub> dataHub)
         {
-            new Data
-            {
-                state = "Running"
-            }
-        };
+            this.hubContext = dataHub;
+        }
         // GET api/values
         [HttpGet]
-        public ActionResult<string> Get()
+        public async Task<ActionResult> Get()
         {
-            return "Hello";
+            await this.hubContext.Clients.All.SendAsync("HelloEvent", "Hello from all");
+            return new JsonResult("hello");
         }
 
         // GET api/values/5

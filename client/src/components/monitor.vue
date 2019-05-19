@@ -5,6 +5,9 @@
     <div class="message d-flex justify-content-center">
       {{message}}
     </div>
+    <div class="message d-flex justify-content-right">
+      {{hellomessage}}
+    </div>
   </div>
 </template>
 
@@ -17,9 +20,17 @@ export default {
   props: {
     msg: String
   },
+  created() {
+    this.$dataHub.$on('data-changed', this.onDataChange)
+    this.hellomessage = 'Hello me'
+  },
+  beforeDestroy() {
+    this.$dataHub.$off('data-changed', this.onDataChange)
+  },
   data() {
       return {
-          message: ""
+          message: "", 
+          hellomessage: ""
       }
   },
   mounted(){
@@ -29,6 +40,9 @@ export default {
       monitor.setDelegate(this.callbackOnP5)
   },
   methods: {
+      onDataChange({message}){
+        this.hellomessage = message
+      },
       callbackOnP5: function(timeStr){
           this.message = timeStr;
       }

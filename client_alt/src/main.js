@@ -1,19 +1,22 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+
+import axios from 'axios'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@fortawesome/fontawesome-free/css/all.css'
-import axios from 'axios'
-import DataHub from '@/js/data-hub.js'
+import dataHub from '@/data-hub.js'
 
-axios.defaults.baseURL = 'https://localhost:5001'
 Vue.config.productionTip = false
+
+axios.defaults.baseURL = 'https://localhost:5001/api' // same as the Url the server listens to
 Vue.prototype.$http = axios
 
+// Install Vue extensions
 Vue.use(BootstrapVue)
-Vue.use(DataHub)
+Vue.use(dataHub)
 
 new Vue({
   router,
