@@ -20,7 +20,7 @@ namespace server.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new Guid("1fbc674e-77f8-4592-b075-812adc4c5dde"));
+                        .HasDefaultValue(new Guid("0dab65ce-3c80-4ff1-93cc-36755b2c16b0"));
 
                     b.Property<bool>("Pump1State");
 
@@ -49,7 +49,7 @@ namespace server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("21687b99-0470-48dc-b10e-cdb18778cc10"),
+                            Id = new Guid("155682a1-8f0d-4cf6-a3bd-7f1a16870eac"),
                             Pump1State = true,
                             Pump2State = true,
                             Pump3State = false,

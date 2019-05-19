@@ -23,4 +23,12 @@
       <Folder Include="Migrations" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="TcpClient\bin\Debug\netcoreapp2.2\TcpClient.deps.json" />
+      <_ContentIncludedByDefault Remove="TcpClient\bin\Debug\netcoreapp2.2\TcpClient.runtimeconfig.dev.json" />
+      <_ContentIncludedByDefault Remove="TcpClient\bin\Debug\netcoreapp2.2\TcpClient.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="TcpClient\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="TcpClient\obj\project.packagespec.json" />
+    </ItemGroup>
+
 </Project>
