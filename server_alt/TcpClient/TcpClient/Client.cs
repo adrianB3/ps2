@@ -4,16 +4,23 @@ using System.Threading.Tasks;
 
 namespace TcpClient
 {
-    public class Client: IDisposable
+    class Client : IDisposable
     {
         private readonly System.Net.Sockets.TcpClient _tcpClient;
         private readonly string _ipAddress;
         private readonly int _port;
         private NetworkStream _stream;
+       
 
-        public Client(System.Net.Sockets.TcpClient tcpClient)
+        public Client(string ipAddress, int port)
         {
-            _tcpClient = tcpClient;
+            _tcpClient = new System.Net.Sockets.TcpClient();
+            _ipAddress = ipAddress;
+            _port = port;
+        }
+        public async Task ConnectAsync()
+        {
+            await _tcpClient.ConnectAsync(_ipAddress, _port);
             _stream = _tcpClient.GetStream();
         }
 
@@ -22,7 +29,7 @@ namespace TcpClient
             return _stream.WriteAsync(data, 0, data.Length);
         }
 
-        public async Task<byte[]> ReceiveAsync(int count)
+        public async Task<byte[]> ReceiveAsync(int count) 
         {
             byte[] data = new byte[count];
             var i = 0;
