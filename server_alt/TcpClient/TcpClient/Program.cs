@@ -26,33 +26,6 @@ namespace TcpClient
         public bool WaterLevelSensor4State { get; set; }
     }
 
-    public class ClientForTcp
-    {
-        private  string ipAddress = "127.0.0.1";
-        private  int port = 8000;
-        private Client client;
-        
-        public ClientForTcp()
-        {
-            System.Net.Sockets.TcpClient tcpC = new System.Net.Sockets.TcpClient();
-            client = new Client(this.ipAddress, this.port);
-        }
-        
-        public async Task<Model> listen()
-        {
-            Model model = new Model();
-            await this.client.ConnectAsync();
-            byte[] data = new byte[2];
-            data = await this.client.ReceiveAsync(2);
-            string result = "";
-            result += System.Text.Encoding.ASCII.GetString(data);
-
-            Console.WriteLine(result);
-
-            return model;
-        } 
-    }
-    
     class Program
     {
         public static System.Timers.Timer timy = new System.Timers.Timer(1800); 
@@ -82,32 +55,8 @@ namespace TcpClient
 
         static void Main(string[] args)
         {
-            //tcp_listener();
-            while (true)
-            {
-                SendHttpPost(state, Url);
-                Thread.Sleep(1000);
-                state.Pump1State = true;
-                state.Pump2State = true;
-                state.Pump3State = true;
-                state.Pump4State = true;
-                state.WaterLevelSensor4State = true;
-                state.WaterLevelSensor2State = true;
-                state.WaterLevelSensor3State = true;
-                state.WaterLevelSensor1State = true;
-                SendHttpPost(state, Url);
-                Thread.Sleep(1000);
-                state.Pump1State = false;
-                state.Pump2State = false;
-                state.Pump3State = false;
-                state.Pump4State = false;
-                
-                state.WaterLevelSensor4State = false;
-                state.WaterLevelSensor2State = false;
-                state.WaterLevelSensor3State = false;
-                state.WaterLevelSensor1State = false;
-                
-            }
+            tcp_listener();
+            
             
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(CurrentDomain_ProcessExit);
 
